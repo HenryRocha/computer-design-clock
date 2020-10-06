@@ -1,0 +1,36 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "3f7b49e602eff68819b15314c28d5190276cf78a33d93d694c0510112e160fe9"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.6"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "colorama": {
+            "hashes": [
+                "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff",
+                "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==0.4.3"
+        },
+        "vunit-hdl": {
+            "hashes": [
+                "sha256:21c9566f9546049bc0b7d3a44c5f4fd20755a51284d24fba1e5f4a8f90a9df29"
+            ],
+            "index": "pypi",
+            "version": "==4.4.0"
+        }
+    },
+    "develop": {}
+}

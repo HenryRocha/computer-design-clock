@@ -49,3 +49,6 @@ timing
 *sopc_*
 PLLJ_PLLSPE_INFO.txt # The generated PLL specification file
 *.cdf
+
+# Ignore Vunit output
+vunit_out
