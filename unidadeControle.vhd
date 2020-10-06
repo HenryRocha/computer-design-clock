@@ -74,17 +74,17 @@ BEGIN
     habEscritaReg <= add OR addi OR sub OR subi OR movm OR lea OR cmp OR instOR OR instAND;
 
     WITH opcode SELECT
-        operacao <= "000" WHEN opcodeLea,
-        "000" WHEN opcodeMovm,
-        "001" WHEN opcodeAdd,
+        operacao <= "001" WHEN opcodeAdd,
         "001" WHEN opcodeAddi,
-        "001" WHEN opcodeJMP,
-        "001" WHEN opcodeJE,
-        "001" WHEN opcodeJNE,
-        "010" WHEN opcodeCmp,
         "010" WHEN opcodeSub,
         "010" WHEN opcodeSubi,
+        "011" WHEN opcodeMovm,
         "100" WHEN opcodeMovr,
+        "011" WHEN opcodeLea,
+        "010" WHEN opcodeCmp,
+        "001" WHEN opcodeJE,
+        "001" WHEN opcodeJNE,
+        "001" WHEN opcodeJMP,
         "101" WHEN opcodeOr,
         "110" WHEN opcodeAnd,
         "000" WHEN OTHERS;
