@@ -2,6 +2,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 ENTITY clock IS
+    GENERIC (
+        DATA_WIDTH : NATURAL := 8;
+        ADDR_WIDTH : NATURAL := 12
+    );
     PORT (
         -- Input ports
         CLOCK_50     : IN std_logic;
@@ -17,6 +21,15 @@ END ENTITY;
 
 ARCHITECTURE main OF clock IS
 BEGIN
+    CPU : ENTITY work.CPU
+        GENERIC MAP(
+            DATA_WIDTH => DATA_WIDTH,
+            ADDR_WIDTH => ADDR_WIDTH
+        )
+        PORT MAP(
+            clk => CLOCK_50
+        );
+
     LEDR(5 DOWNTO 0) <= SW(5 DOWNTO 0);
     LEDR(9 DOWNTO 6) <= NOT KEY(3 DOWNTO 0);
 END ARCHITECTURE;
