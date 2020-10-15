@@ -34,9 +34,7 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL controleDecodificador : std_logic_vector(5 DOWNTO 0);
 
     -- Barramentos
-    SIGNAL barramentoEntradaDados   : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL saidaInterfacesEstendida : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL saidaInterfaces          : std_logic_vector(0 DOWNTO 0);
+    SIGNAL barramentoEntradaDados : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao
     ALIAS valorImediato  : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) IS instrucao(DATA_WIDTH - 1 DOWNTO 0);
@@ -175,20 +173,8 @@ BEGIN
             entrada  => sw,
             endereco => enderecoRAMROM,
             habilita => habBarramentoEscritaChaves,
-            saida    => saidaInterfaces
+            saida    => barramentoEntradaDados
         );
-
-    estendeSinal : ENTITY work.estendeSinalGenerico
-        GENERIC MAP(
-            larguraDadoEntrada => 1,
-            larguraDadoSaida   => DATA_WIDTH
-        )
-        PORT MAP(
-            estendeSinal_IN  => saidaInterfaces,
-            estendeSinal_OUT => saidaInterfacesEstendida
-        );
-
-    barramentoEntradaDados <= saidaInterfacesEstendida WHEN (habBarramentoEscritaChaves OR habBarramentoEscritaBtn);
 
     programCounter <= pc_out;
     opCode         <= instOpCode;

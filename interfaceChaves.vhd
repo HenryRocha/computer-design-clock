@@ -10,15 +10,15 @@ ENTITY interfaceChaves IS
         entrada  : IN std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
         endereco : IN std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         habilita : IN std_logic;
-        saida    : OUT std_logic_vector(0 DOWNTO 0)
+        saida    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
-ARCHITECTURE comportamento OF interfaceChaves IS
-    SIGNAL temp : std_logic;
+ARCHITECTURE main OF interfaceChaves IS
+    SIGNAL temp : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
 BEGIN
     WITH endereco SELECT
-        temp <= entrada(0) WHEN "000000000000",
+        temp(0) <= entrada(0) WHEN "000000000000",
         entrada(1) WHEN "000000000001",
         entrada(2) WHEN "000000000010",
         entrada(3) WHEN "000000000011",
@@ -27,8 +27,8 @@ BEGIN
         entrada(6) WHEN "000000000110",
         entrada(7) WHEN "000000000111",
         entrada(8) WHEN "000000001000",
-        '1' WHEN OTHERS;
+        '0' WHEN OTHERS;
 
-    saida(0) <= temp WHEN (habilita = '1') ELSE
-    '0';
+    saida <= temp WHEN (habilita = '1') ELSE
+        (OTHERS => 'Z');
 END ARCHITECTURE;
