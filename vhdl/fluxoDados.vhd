@@ -206,6 +206,17 @@ BEGIN
             HEX5     => HEX5
         );
 
+    interfaceBaseTempo : ENTITY work.divisorGenerico_e_Interface
+        GENERIC MAP(
+            DATA_WIDTH => DATA_WIDTH
+        )
+        PORT MAP(
+            clk              => clk,
+            habilitaLeitura  => habBarramentoBaseTempo,
+            limpaLeitura     => habBarramentoLimpaBaseTempo,
+            leituraUmSegundo => barramentoEntradaDados
+        );
+
     programCounter <= pc_out;
     opCode         <= instOpCode;
 END ARCHITECTURE;
