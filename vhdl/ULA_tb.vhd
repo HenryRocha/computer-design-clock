@@ -46,11 +46,24 @@ BEGIN
         test_runner_setup(runner, runner_cfg);
 
         WHILE test_suite LOOP
-            IF run("test_ADD") THEN
-                muxImedDados_out <= "00000000";
-                bancoReg_out     <= "00000000";
+            IF run("test_ADD_A_0") THEN
+                muxImedDados_out <= "00000111";
+                bancoReg_out     <= "00000001";
+                operacao         <= "100";
+                expectedResult   <= "00000111";
+                WAIT UNTIL clk = '1';
+                ASSERT(ULA_out = expectedResult)
+                REPORT (
+                    "ULA_out mismatch. Expected: "
+                    & to_string(expectedResult)
+                    & ". Got: "
+                    & to_string(ULA_out))
+                    SEVERITY error;
+            ELSIF run("test_ADD_B_0") THEN
+                muxImedDados_out <= "00000001";
+                bancoReg_out     <= "00000111";
                 operacao         <= "011";
-                expectedResult   <= "01100110";
+                expectedResult   <= "00000111";
                 WAIT UNTIL clk = '1';
                 ASSERT(ULA_out = expectedResult)
                 REPORT (
