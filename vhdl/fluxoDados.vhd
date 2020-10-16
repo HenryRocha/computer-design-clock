@@ -51,12 +51,12 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS habEscritaRAM   : std_logic IS palavraControle(0);
 
     -- Partes do decodificador
-    ALIAS habBarramentoLimpaLeitura  : std_logic IS controleDecodificador(5);
-    ALIAS habBarramentoEscritaChaves : std_logic IS controleDecodificador(4);
-    ALIAS habBarramentoEscritaBtn    : std_logic IS controleDecodificador(3);
-    ALIAS habBarramentoEscritaTempo  : std_logic IS controleDecodificador(2);
-    ALIAS habBarramentoHex           : std_logic IS controleDecodificador(1);
-    ALIAS habBarramentoEscritaRAM    : std_logic IS controleDecodificador(0);
+    ALIAS habBarramentoLimpaBaseTempo : std_logic IS controleDecodificador(5);
+    ALIAS habBarramentoEscritaChaves  : std_logic IS controleDecodificador(4);
+    ALIAS habBarramentoEscritaBtn     : std_logic IS controleDecodificador(3);
+    ALIAS habBarramentoBaseTempo      : std_logic IS controleDecodificador(2);
+    ALIAS habBarramentoHex            : std_logic IS controleDecodificador(1);
+    ALIAS habBarramentoEscritaRAM     : std_logic IS controleDecodificador(0);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 1;

@@ -20,7 +20,7 @@ BEGIN
     habilita(0) <= '1' WHEN numSeletor >= 3072 ELSE
     '0';
 
-    habilita(1) <= '1' WHEN numSeletor >= 2048 AND numSeletor <= 2053 ELSE
+    habilita(1) <= '1' WHEN numSeletor >= 2048 AND numSeletor <= 2050 ELSE
     '0';
 
     habilita(2) <= '1' WHEN numSeletor = 1024 ELSE
