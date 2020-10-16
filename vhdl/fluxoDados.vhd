@@ -15,6 +15,7 @@ ENTITY fluxoDados IS
         sw              : IN std_logic_vector(9 DOWNTO 0);
         key             : IN std_logic_vector(3 DOWNTO 0);
         -- Output ports
+        flagZero                           : OUT std_logic;
         opCode                             : OUT std_logic_vector(3 DOWNTO 0);
         programCounter                     : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
@@ -31,7 +32,6 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL ULA_out               : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL bancoReg_out          : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL RAM_out               : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL flagZero              : std_logic;
     SIGNAL controleDecodificador : std_logic_vector(5 DOWNTO 0);
 
     -- Barramentos
@@ -41,7 +41,7 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS valorImediato  : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) IS instrucao(DATA_WIDTH - 1 DOWNTO 0);
     ALIAS enderecoRAMROM : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) IS instrucao(ADDR_WIDTH - 1 DOWNTO 0);
     ALIAS enderecoReg    : std_logic_vector(2 DOWNTO 0) IS instrucao(14 DOWNTO 12);
-    ALIAS instOpCode     : std_logic_vector(3 DOWNTO 0) IS instrucao(19 DOWNTO 16);
+    ALIAS instOpCode     : std_logic_vector(3 DOWNTO 0) IS instrucao(18 DOWNTO 15);
 
     -- Partes da palavra de controle
     ALIAS selMuxProxPC    : std_logic IS palavraControle(7);
@@ -107,7 +107,7 @@ BEGIN
 
     decodificador : ENTITY work.decodificador
         GENERIC MAP(
-            DATA_WIDTH => DATA_WIDTH
+            DATA_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
             seletor  => enderecoRAMROM,
@@ -116,7 +116,7 @@ BEGIN
 
     MuxImedDados : ENTITY work.muxGenerico2x1
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            larguraDados => DATA_WIDTH
         )
         PORT MAP(
             entradaA_MUX => barramentoEntradaDados,
@@ -140,7 +140,7 @@ BEGIN
 
     ULA : ENTITY work.ULA
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            larguraDados => DATA_WIDTH
         )
         PORT MAP(
             entradaA => muxImedDados_out,
