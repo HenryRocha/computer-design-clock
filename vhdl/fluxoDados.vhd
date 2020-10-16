@@ -196,7 +196,7 @@ BEGIN
         )
         PORT MAP(
             endereco => enderecoRAMROM,
-            habilita => habBarramentoEscritaChaves,
+            habilita => habBarramentoHex,
             dados    => bancoReg_out,
             HEX0     => HEX0,
             HEX1     => HEX1,
