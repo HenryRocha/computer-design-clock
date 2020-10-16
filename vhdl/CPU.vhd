@@ -32,6 +32,7 @@ BEGIN
             sw              => sw,
             key             => key,
             palavraControle => palavraControle,
+            flagZero        => flagZero,
             opCode          => opCode,
             programCounter  => programCounter,
             HEX0            => HEX0,
