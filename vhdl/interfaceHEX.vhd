@@ -30,7 +30,8 @@ BEGIN
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX0);
+            saida7seg => interHEX0
+        );
 
     conversorHex1 : ENTITY work.conversorHex7Seg
         PORT MAP(
@@ -38,7 +39,8 @@ BEGIN
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX1);
+            saida7seg => interHEX1
+        );
 
     conversorHex2 : ENTITY work.conversorHex7Seg
         PORT MAP(
@@ -46,7 +48,8 @@ BEGIN
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX2);
+            saida7seg => interHEX2
+        );
 
     conversorHex3 : ENTITY work.conversorHex7Seg
         PORT MAP(
@@ -54,7 +57,8 @@ BEGIN
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX3);
+            saida7seg => interHEX3
+        );
 
     conversorHex4 : ENTITY work.conversorHex7Seg
         PORT MAP(
@@ -70,23 +74,24 @@ BEGIN
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX5);
+            saida7seg => interHEX5
+        );
 
-    HEX0 <= interHEX0 WHEN endereco = "100000000000" ELSE
+    HEX0 <= interHEX0 WHEN (endereco = "100000000000" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
-    HEX1 <= interHEX1 WHEN endereco = "100000000000" ELSE
+    HEX1 <= interHEX1 WHEN (endereco = "100000000000" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
-    HEX2 <= interHEX2 WHEN endereco = "100000000001" ELSE
+    HEX2 <= interHEX2 WHEN (endereco = "100000000001" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
-    HEX3 <= interHEX3 WHEN endereco = "100000000001" ELSE
+    HEX3 <= interHEX3 WHEN (endereco = "100000000001" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
-    HEX4 <= interHEX4 WHEN endereco = "100000000010" ELSE
+    HEX4 <= interHEX4 WHEN (endereco = "100000000010" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
-    HEX5 <= interHEX5 WHEN endereco = "100000000010" ELSE
+    HEX5 <= interHEX5 WHEN (endereco = "100000000010" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 END ARCHITECTURE;
