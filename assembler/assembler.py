@@ -67,4 +67,5 @@ class Assembler():
     @staticmethod
     def __save_file(instructions: list, output: str) -> None:
         with open(output, 'w') as f:
-            f.write('\n'.join(instructions))
+            for line, instruction in enumerate(instructions):
+                f.write(f'\t\ttmp({line}) := \"{instruction}\";\n')
