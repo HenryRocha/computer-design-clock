@@ -19,8 +19,11 @@ ARCHITECTURE assincrona OF memoriaROM IS
     FUNCTION initMemory
         RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
     BEGIN
-        tmp(0) := "0110000000000000111";
-        tmp(1) := "0101000100000000000";
+        -- Funfa
+        tmp(0) := "1010000000000000001";
+        tmp(1) := "0110000000000000111";
+        tmp(2) := "0101000100000000000";
+        tmp(3) := "1010000000000000000";
         RETURN tmp;
     END initMemory;
 
