@@ -17,12 +17,12 @@ ENTITY interfaceHEX IS
 END ENTITY;
 
 ARCHITECTURE main OF interfaceHEX IS
-    SIGNAL interHEX0 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL interHEX1 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL interHEX2 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL interHEX3 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL interHEX4 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-    SIGNAL interHEX5 : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL interHEX0 : std_logic_vector(6 DOWNTO 0);
+    SIGNAL interHEX1 : std_logic_vector(6 DOWNTO 0);
+    SIGNAL interHEX2 : std_logic_vector(6 DOWNTO 0);
+    SIGNAL interHEX3 : std_logic_vector(6 DOWNTO 0);
+    SIGNAL interHEX4 : std_logic_vector(6 DOWNTO 0);
+    SIGNAL interHEX5 : std_logic_vector(6 DOWNTO 0);
 BEGIN
     conversorHex0 : ENTITY work.conversorHex7Seg
         PORT MAP(
