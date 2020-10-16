@@ -15,7 +15,7 @@ ENTITY divisorGenerico_e_Interface IS
 END ENTITY;
 
 ARCHITECTURE interface OF divisorGenerico_e_Interface IS
-    SIGNAL sinalUmSegundo   : std_logic;
+    SIGNAL sinalUmSegundo   : std_logic_vector(0 DOWNTO 0);
     SIGNAL saidaclk_reg1seg : std_logic;
     SIGNAL temp             : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
 BEGIN
@@ -29,16 +29,19 @@ BEGIN
         );
 
     registraUmSegundo : ENTITY work.registradorGenerico
+        GENERIC MAP(
+            larguraDados => 1
+        )
         PORT MAP(
-            DIN    => '1',
+            DIN    => "1",
             DOUT   => sinalUmSegundo,
             ENABLE => '1',
             CLK    => saidaclk_reg1seg,
             RST    => limpaLeitura
         );
 
-    temp(0) <= sinalUmSegundo;
+    temp(0) <= sinalUmSegundo(0);
     -- Faz o tristate de saida:
     leituraUmSegundo <= temp WHEN habilitaLeitura = '1' ELSE
-        'Z';
+        (OTHERS => 'Z');
 END ARCHITECTURE interface;
