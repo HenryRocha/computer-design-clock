@@ -20,10 +20,11 @@ ARCHITECTURE assincrona OF memoriaROM IS
         RETURN blocoMemoria IS VARIABLE tmp : blocoMemoria := (OTHERS => (OTHERS => '0'));
     BEGIN
         -- Funfa
-        tmp(0) := "1010000000000000001";
-        tmp(1) := "0110000000000000111";
-        tmp(2) := "0101000100000000000";
-        tmp(3) := "1010000000000000000";
+        -- tmp(0) := "1010" & "000" & "000000000001"; -- Jump 1
+        -- tmp(0) := "0000" & "000" & "000000000000"; -- Jump 1
+        tmp(0) := "0110" & "000" & "000000000111"; -- Lea 7 > R0
+        tmp(1) := "0101" & "000" & "100000000000"; -- Movr r0, 2048
+        tmp(2) := "1010" & "000" & "000000000000"; -- Jump 0
         RETURN tmp;
     END initMemory;
 

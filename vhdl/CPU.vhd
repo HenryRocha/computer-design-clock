@@ -12,7 +12,11 @@ ENTITY CPU IS
         clk                                : IN std_logic;
         sw                                 : IN std_logic_vector(9 DOWNTO 0);
         key                                : IN std_logic_vector(3 DOWNTO 0);
-        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
+        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0)  := (OTHERS => '-');
+        saidaBancoRegsOUT                  : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
+        opCodeOUT                          : OUT std_logic_vector(3 DOWNTO 0)  := (OTHERS => '-');
+        palavraControleOUT                 : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
+        programCounterOUT                  : OUT std_logic_vector(11 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -21,6 +25,8 @@ ARCHITECTURE main OF CPU IS
     SIGNAL palavraControle : std_logic_vector(7 DOWNTO 0);
     SIGNAL opCode          : std_logic_vector(3 DOWNTO 0);
     SIGNAL flagZero        : std_logic;
+
+    SIGNAL saidaBancoRegs : std_logic_vector(7 DOWNTO 0);
 BEGIN
     FD : ENTITY work.fluxoDados
         GENERIC MAP(
@@ -35,6 +41,7 @@ BEGIN
             flagZero        => flagZero,
             opCode          => opCode,
             programCounter  => programCounter,
+            saidaBancoRegs  => saidaBancoRegs,
             HEX0            => HEX0,
             HEX1            => HEX1,
             HEX2            => HEX2,
@@ -50,4 +57,9 @@ BEGIN
             opCode          => opCode,
             clk             => clk
         );
+
+    palavraControleOUT <= palavraControle;
+    saidaBancoRegsOUT  <= saidaBancoRegs;
+    programCounterOUT  <= programCounter;
+    opCodeOUT          <= opCode;
 END ARCHITECTURE;
