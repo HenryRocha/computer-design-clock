@@ -52,7 +52,7 @@ BEGIN
         test_runner_setup(runner, runner_cfg);
 
         WHILE test_suite LOOP
-            IF run("test_1_d1") THEN
+            IF run("w1_hex0_hex1") THEN
                 enderecoRAMROM             <= "100000000000";
                 habBarramentoEscritaChaves <= '1';
                 dados                      <= "00000001";
@@ -69,7 +69,7 @@ BEGIN
                 check_equal(HEX3, expHEX3);
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
-            ELSIF run("test_1_semHab_d1") THEN
+            ELSIF run("w1_hex0_hex1_semHab") THEN
                 enderecoRAMROM             <= "100000000000";
                 habBarramentoEscritaChaves <= '0';
                 dados                      <= "00000001";
@@ -87,7 +87,7 @@ BEGIN
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
 
-            ELSIF run("test_1_d2") THEN
+            ELSIF run("w1_hex2_hex3") THEN
                 enderecoRAMROM             <= "100000000001";
                 habBarramentoEscritaChaves <= '1';
                 dados                      <= "00000001";
@@ -104,7 +104,7 @@ BEGIN
                 check_equal(HEX3, expHEX3);
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
-            ELSIF run("test_1_semHab_d2") THEN
+            ELSIF run("w1_hex2_hex3_semHab") THEN
                 enderecoRAMROM             <= "100000000001";
                 habBarramentoEscritaChaves <= '0';
                 dados                      <= "00000001";
@@ -122,7 +122,7 @@ BEGIN
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
 
-            ELSIF run("test_1_d3") THEN
+            ELSIF run("w1_hex4_hex5") THEN
                 enderecoRAMROM             <= "100000000010";
                 habBarramentoEscritaChaves <= '1';
                 dados                      <= "00000001";
@@ -139,7 +139,7 @@ BEGIN
                 check_equal(HEX3, expHEX3);
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
-            ELSIF run("test_1_semHab_d3") THEN
+            ELSIF run("w1_hex4_hex5_semHab") THEN
                 enderecoRAMROM             <= "100000000010";
                 habBarramentoEscritaChaves <= '0';
                 dados                      <= "00000001";
