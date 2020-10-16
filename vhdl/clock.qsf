@@ -238,6 +238,23 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SDC_FILE clock.sdc
+set_global_assignment -name VHDL_FILE ULA.vhd
+set_global_assignment -name VHDL_FILE divisorGenerico.vhd
+set_global_assignment -name VHDL_FILE bancoRegistradores.vhd
+set_global_assignment -name VHDL_FILE conversorHex7Seg.vhd
+set_global_assignment -name VHDL_FILE memoriaROM.vhd
+set_global_assignment -name VHDL_FILE interfaceChaves.vhd
+set_global_assignment -name VHDL_FILE somaConstante.vhd
+set_global_assignment -name VHDL_FILE interfaceHEX.vhd
+set_global_assignment -name VHDL_FILE decodificador.vhd
+set_global_assignment -name VHDL_FILE memoriaRAM.vhd
+set_global_assignment -name VHDL_FILE estendeSinalGenerico.vhd
+set_global_assignment -name VHDL_FILE registradorGenerico.vhd
+set_global_assignment -name VHDL_FILE muxGenerico2x1.vhd
+set_global_assignment -name VHDL_FILE interfaceBotoes.vhd
+set_global_assignment -name VHDL_FILE fluxoDados.vhd
+set_global_assignment -name VHDL_FILE dividorGenerico_e_Interface.vhd
 set_global_assignment -name VHDL_FILE unidadeControle.vhd
 set_global_assignment -name VHDL_FILE CPU.vhd
 set_global_assignment -name VHDL_FILE clock.vhd
