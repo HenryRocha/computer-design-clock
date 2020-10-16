@@ -7,7 +7,7 @@ ENTITY interfaceChaves IS
         ADDR_WIDTH : NATURAL := 12
     );
     PORT (
-        entrada  : IN std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+        entrada  : IN std_logic_vector(9 DOWNTO 0);
         endereco : IN std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         habilita : IN std_logic;
         saida    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0)
