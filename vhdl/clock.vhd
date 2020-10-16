@@ -28,7 +28,8 @@ BEGIN
         )
         PORT MAP(
             clk => CLOCK_50,
-            sw  => SW
+            sw  => SW,
+            key => KEY
         );
 
     LEDR(5 DOWNTO 0) <= SW(5 DOWNTO 0);

@@ -13,6 +13,7 @@ ENTITY fluxoDados IS
         clk             : IN std_logic;
         palavraControle : IN std_logic_vector(7 DOWNTO 0);
         sw              : IN std_logic_vector(9 DOWNTO 0);
+        key             : IN std_logic_vector(3 DOWNTO 0);
         -- Output ports
         opCode         : OUT std_logic_vector(3 DOWNTO 0);
         programCounter : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
@@ -173,6 +174,18 @@ BEGIN
             entrada  => sw,
             endereco => enderecoRAMROM,
             habilita => habBarramentoEscritaChaves,
+            saida    => barramentoEntradaDados
+        );
+
+    intBtn : ENTITY work.interfaceBotoes
+        GENERIC MAP(
+            DATA_WIDTH => DATA_WIDTH,
+            ADDR_WIDTH => ADDR_WIDTH
+        )
+        PORT MAP(
+            entrada  => key,
+            endereco => enderecoRAMROM,
+            habilita => habBarramentoEscritaBtn,
             saida    => barramentoEntradaDados
         );
 

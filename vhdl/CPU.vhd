@@ -10,7 +10,8 @@ ENTITY CPU IS
     PORT (
         -- Input ports
         clk : IN std_logic;
-        sw  : IN std_logic_vector(9 DOWNTO 0)
+        sw  : IN std_logic_vector(9 DOWNTO 0);
+        key : IN std_logic_vector(3 DOWNTO 0)
     );
 END ENTITY;
 
@@ -28,6 +29,7 @@ BEGIN
         PORT MAP(
             clk             => clk,
             sw              => sw,
+            key             => key,
             palavraControle => palavraControle,
             opCode          => opCode,
             programCounter  => programCounter
