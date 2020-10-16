@@ -25,8 +25,8 @@ END ENTITY;
 ARCHITECTURE main OF fluxoDados IS
     -- Sinais intermediarios
     SIGNAL instrucao             : std_logic_vector(INST_WIDTH - 1 DOWNTO 0);
-    SIGNAL pc_out                : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
-    SIGNAL muxProxPC_out         : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
+    SIGNAL pc_out                : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := "000000000000";
+    SIGNAL muxProxPC_out         : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := "000000000000";
     SIGNAL somaUm_out            : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
     SIGNAL muxImedDados_out      : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL ULA_out               : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
@@ -217,6 +217,6 @@ BEGIN
             leituraUmSegundo => barramentoEntradaDados
         );
 
-    programCounter <= pc_out;
-    opCode         <= instOpCode;
+    programCounter    <= pc_out;
+    opCode            <= instOpCode;
 END ARCHITECTURE;

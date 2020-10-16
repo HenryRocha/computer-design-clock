@@ -32,6 +32,7 @@ BEGIN
         IF (rising_edge(clk)) THEN
             IF (habilitaEscrita = '1') THEN
                 registrador(to_integer(unsigned(endereco))) := dadoEscrita;
+                saida <= registrador(to_integer(unsigned(endereco)));
             END IF;
         END IF;
     END PROCESS;
