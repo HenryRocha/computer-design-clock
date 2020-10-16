@@ -9,9 +9,10 @@ ENTITY CPU IS
     );
     PORT (
         -- Input ports
-        clk : IN std_logic;
-        sw  : IN std_logic_vector(9 DOWNTO 0);
-        key : IN std_logic_vector(3 DOWNTO 0)
+        clk                                : IN std_logic;
+        sw                                 : IN std_logic_vector(9 DOWNTO 0);
+        key                                : IN std_logic_vector(3 DOWNTO 0);
+        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -32,7 +33,13 @@ BEGIN
             key             => key,
             palavraControle => palavraControle,
             opCode          => opCode,
-            programCounter  => programCounter
+            programCounter  => programCounter,
+            HEX0            => HEX0,
+            HEX1            => HEX1,
+            HEX2            => HEX2,
+            HEX3            => HEX3,
+            HEX4            => HEX4,
+            HEX5            => HEX5
         );
 
     UC : ENTITY work.unidadeControle

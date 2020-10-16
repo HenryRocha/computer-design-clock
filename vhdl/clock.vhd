@@ -27,9 +27,15 @@ BEGIN
             ADDR_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
-            clk => CLOCK_50,
-            sw  => SW,
-            key => KEY
+            clk  => CLOCK_50,
+            sw   => SW,
+            key  => KEY,
+            HEX0 => HEX0,
+            HEX1 => HEX1,
+            HEX2 => HEX2,
+            HEX3 => HEX3,
+            HEX4 => HEX4,
+            HEX5 => HEX5
         );
 
     LEDR(5 DOWNTO 0) <= SW(5 DOWNTO 0);

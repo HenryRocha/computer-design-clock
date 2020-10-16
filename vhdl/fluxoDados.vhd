@@ -15,9 +15,9 @@ ENTITY fluxoDados IS
         sw              : IN std_logic_vector(9 DOWNTO 0);
         key             : IN std_logic_vector(3 DOWNTO 0);
         -- Output ports
-        opCode         : OUT std_logic_vector(3 DOWNTO 0);
-        programCounter : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
-        HEX0, HEX1     : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
+        opCode                             : OUT std_logic_vector(3 DOWNTO 0);
+        programCounter                     : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
+        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -187,6 +187,23 @@ BEGIN
             endereco => enderecoRAMROM,
             habilita => habBarramentoEscritaBtn,
             saida    => barramentoEntradaDados
+        );
+
+    intHEX : ENTITY work.interfaceHEX
+        GENERIC MAP(
+            DATA_WIDTH => DATA_WIDTH,
+            ADDR_WIDTH => ADDR_WIDTH
+        )
+        PORT MAP(
+            endereco => enderecoRAMROM,
+            habilita => habBarramentoEscritaChaves,
+            dados    => bancoReg_out,
+            HEX0     => HEX0,
+            HEX1     => HEX1,
+            HEX2     => HEX2,
+            HEX3     => HEX3,
+            HEX4     => HEX4,
+            HEX5     => HEX5
         );
 
     programCounter <= pc_out;
