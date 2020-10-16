@@ -27,6 +27,7 @@ BEGIN
         entrada(6) WHEN "000000000110",
         entrada(7) WHEN "000000000111",
         entrada(8) WHEN "000000001000",
+        entrada(9) WHEN "000000001010",
         '0' WHEN OTHERS;
 
     saida <= temp WHEN (habilita = '1') ELSE
