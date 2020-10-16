@@ -106,7 +106,7 @@ BEGIN
 
     decodificador : ENTITY work.decodificador
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            DATA_WIDTH => DATA_WIDTH
         )
         PORT MAP(
             seletor  => enderecoRAMROM,
