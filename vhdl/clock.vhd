@@ -19,6 +19,8 @@ ENTITY clock IS
         opCode                             : OUT std_logic_vector(3 DOWNTO 0);
         saidaBancoRegs                     : OUT std_logic_vector(7 DOWNTO 0);
         palavraControleOUT                 : OUT std_logic_vector(7 DOWNTO 0);
+        saidaULA                           : OUT std_logic_vector(7 DOWNTO 0);
+        saidaMuxImed                       : OUT std_logic_vector(7 DOWNTO 0);
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0)
     );
 END ENTITY;
@@ -51,7 +53,9 @@ BEGIN
             programCounterOUT  => programCounter,
             opCodeOUT          => opCode,
             saidaBancoRegsOUT  => saidaBancoRegs,
-            palavraControleOUT => palavraControleOUT
+            palavraControleOUT => palavraControleOUT,
+            ULAOUT             => saidaULA,
+            muxImedDados       => saidaMuxImed
         );
 
     LEDR(5 DOWNTO 0) <= SW(5 DOWNTO 0);

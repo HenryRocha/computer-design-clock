@@ -117,13 +117,13 @@ BEGIN
             habilita => controleDecodificador
         );
 
-    MuxImedDados : ENTITY work.muxGenerico2x1
+    MuxImedDados_ints : ENTITY work.muxGenerico2x1
         GENERIC MAP(
             larguraDados => DATA_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => barramentoEntradaDados,
-            entradaB_MUX => valorImediato,
+            entradaB_MUX => barramentoEntradaDados,
+            entradaA_MUX => valorImediato,
             seletor_MUX  => selMuxImedDados,
             saida_MUX    => muxImedDados_out
         );
@@ -223,6 +223,6 @@ BEGIN
     programCounter <= pc_out;
     opCode         <= instOpCode;
     saidaBancoRegs <= bancoReg_out;
-    ULAOUT         <= ULA_out
-    muxImedDados   <= muxImedDados_out
+    ULAOUT         <= ULA_out;
+    muxImedDados   <= muxImedDados_out;
 END ARCHITECTURE;
