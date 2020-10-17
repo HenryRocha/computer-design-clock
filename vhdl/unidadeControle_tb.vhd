@@ -46,326 +46,170 @@ BEGIN
                 flagZero                <= '0';
                 expectedPalavraControle <= "01100110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_ADD_FZ") THEN
                 opCode                  <= "0000";
                 flagZero                <= '1';
                 expectedPalavraControle <= "01100110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_ADDI") THEN
                 opCode                  <= "0001";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00100100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_ADDI_FZ") THEN
                 opCode                  <= "0001";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00100100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_SUB") THEN
                 opCode                  <= "0010";
                 flagZero                <= '0';
                 expectedPalavraControle <= "01101010";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_SUB_FZ") THEN
                 opCode                  <= "0010";
                 flagZero                <= '1';
                 expectedPalavraControle <= "01101010";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_SUBI") THEN
                 opCode                  <= "0011";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00101000";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_SUBI_FZ") THEN
                 opCode                  <= "0011";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00101000";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_MOVM") THEN
                 opCode                  <= "0100";
                 flagZero                <= '0';
                 expectedPalavraControle <= "01101110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_MOVM_FZ") THEN
                 opCode                  <= "0100";
                 flagZero                <= '1';
                 expectedPalavraControle <= "01101110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_MOVR") THEN
                 opCode                  <= "0101";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00010001";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_MOVR_FZ") THEN
                 opCode                  <= "0101";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00010001";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_LEA") THEN
                 opCode                  <= "0110";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00101100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_LEA_FZ") THEN
                 opCode                  <= "0110";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00101100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_CMP") THEN
                 opCode                  <= "0111";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00101000";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_CMP_FZ") THEN
                 opCode                  <= "0111";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00101000";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_JE") THEN
                 opCode                  <= "1000";
                 flagZero                <= '0';
                 expectedPalavraControle <= "00000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_JE_FZ") THEN
                 opCode                  <= "1000";
                 flagZero                <= '1';
                 expectedPalavraControle <= "10000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_JNE") THEN
                 opCode                  <= "1001";
                 flagZero                <= '0';
                 expectedPalavraControle <= "10000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_JNE_FZ") THEN
                 opCode                  <= "1001";
                 flagZero                <= '1';
                 expectedPalavraControle <= "00000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_JMP") THEN
                 opCode                  <= "1010";
                 flagZero                <= '0';
                 expectedPalavraControle <= "10000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_JMP_FZ") THEN
                 opCode                  <= "1010";
                 flagZero                <= '1';
                 expectedPalavraControle <= "10000100";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_OR") THEN
                 opCode                  <= "1011";
                 flagZero                <= '0';
                 expectedPalavraControle <= "01110110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_OR_FZ") THEN
                 opCode                  <= "1011";
                 flagZero                <= '1';
                 expectedPalavraControle <= "01110110";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             ELSIF run("test_AND") THEN
                 opCode                  <= "1100";
                 flagZero                <= '0';
                 expectedPalavraControle <= "01111010";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
             ELSIF run("test_AND_FZ") THEN
                 opCode                  <= "1100";
                 flagZero                <= '1';
                 expectedPalavraControle <= "01111010";
                 WAIT UNTIL clk = '1';
-                ASSERT(palavraControle = expectedPalavraControle)
-                REPORT (
-                    "palavraControle mismatch. Expected: "
-                    & to_string(expectedPalavraControle)
-                    & ". Got: "
-                    & to_string(palavraControle))
-                    SEVERITY error;
+                check_equal(palavraControle, expectedPalavraControle);
 
             END IF;
         END LOOP;
