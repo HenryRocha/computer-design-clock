@@ -31,7 +31,7 @@ class Assembler():
         for line, command in enumerate(self.commands):
             structure = command[:-1].split()
             if len(structure) == 1:
-                self.jumps[structure[0].upper()] = line
+                self.jumps[structure[0].upper()] = line + 1 - len(self.jumps.keys())
         for line, command in enumerate(self.commands):
             structure = command[:-1].split()
             try:
@@ -62,7 +62,7 @@ class Assembler():
     @staticmethod
     def __decode_reg_address(address: str) -> str:
         value = int(address[1:], 16)
-        if value > 8:
+        if value <1 or value > 8:
             raise ValueError('Invalid Register Number. Valid Number are 1-8')
         binary = bin(value - 1)[2:]
         return binary.zfill(3)
@@ -77,7 +77,7 @@ class Assembler():
             except KeyError:
                 raise KeyError('Invalid Jump Label.')
         binary = bin(value - 1)[2:]
-        return binary.zfill(3)
+        return binary.zfill(12)
 
     @staticmethod
     def __read_file(file: str) -> list():
@@ -90,6 +90,6 @@ class Assembler():
     def __save_file(instructions: list, output: str) -> None:
         with open(output, 'w') as f:
             for line, instruction in enumerate(instructions):
-                f.write(f'\t\ttmp({line}) := \"{instruction}\";\n')
+                f.write(f'\t\ttmp({line}) := \"{instruction[:4]}\" & \"{instruction[4:7]}\" & \"{instruction[7:]}\";\n')
 
 Assembler('/Users/eller/insper/2020.2/descomp/computer-design-clock/assembler/debug.nasm', 'debug.txt')
