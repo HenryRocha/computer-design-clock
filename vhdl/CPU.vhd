@@ -16,7 +16,9 @@ ENTITY CPU IS
         saidaBancoRegsOUT                  : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
         opCodeOUT                          : OUT std_logic_vector(3 DOWNTO 0)  := (OTHERS => '-');
         palavraControleOUT                 : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
-        programCounterOUT                  : OUT std_logic_vector(11 DOWNTO 0) := (OTHERS => '-')
+        programCounterOUT                  : OUT std_logic_vector(11 DOWNTO 0) := (OTHERS => '-');
+        ULAOUT                             : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
+        muxImedDados                       : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -42,6 +44,8 @@ BEGIN
             opCode          => opCode,
             programCounter  => programCounter,
             saidaBancoRegs  => saidaBancoRegs,
+            ULAOUT          => ULAOUT,
+            muxImedDados    => muxImedDados,
             HEX0            => HEX0,
             HEX1            => HEX1,
             HEX2            => HEX2,

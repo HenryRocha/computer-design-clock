@@ -19,6 +19,8 @@ ENTITY fluxoDados IS
         opCode                             : OUT std_logic_vector(3 DOWNTO 0);
         programCounter                     : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         saidaBancoRegs                     : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+        ULAOUT                             : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+        muxImedDados                       : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
@@ -221,4 +223,6 @@ BEGIN
     programCounter <= pc_out;
     opCode         <= instOpCode;
     saidaBancoRegs <= bancoReg_out;
+    ULAOUT         <= ULA_out
+    muxImedDados   <= muxImedDados_out
 END ARCHITECTURE;
