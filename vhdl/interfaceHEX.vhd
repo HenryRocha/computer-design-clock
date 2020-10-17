@@ -20,12 +20,12 @@ END ENTITY;
 
 ARCHITECTURE main OF interfaceHEX IS
     -- Declarando todos os sinais intermediários.
-    SIGNAL interHEX0 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
-    SIGNAL interHEX1 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
-    SIGNAL interHEX2 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
-    SIGNAL interHEX3 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
-    SIGNAL interHEX4 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
-    SIGNAL interHEX5 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX0 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
+    SIGNAL interHEX1 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
+    SIGNAL interHEX2 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
+    SIGNAL interHEX3 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
+    SIGNAL interHEX4 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
+    SIGNAL interHEX5 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
 BEGIN
     -- Declarando todos os conversores de 7 segmentos.
     conversorHex0 : ENTITY work.conversorHex7Seg
@@ -83,21 +83,15 @@ BEGIN
 
     -- Cada display só será escrito caso o endereço seja o referente aquela
     -- dupla de display. 
-    HEX0 <= interHEX0 WHEN (endereco = "100000000000" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX0 <= interHEX0 WHEN (endereco = "100000000000" AND habilita = '1');
 
-    HEX1 <= interHEX1 WHEN (endereco = "100000000000" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX1 <= interHEX1 WHEN (endereco = "100000000000" AND habilita = '1');
 
-    HEX2 <= interHEX2 WHEN (endereco = "100000000001" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX2 <= interHEX2 WHEN (endereco = "100000000001" AND habilita = '1');
 
-    HEX3 <= interHEX3 WHEN (endereco = "100000000001" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX3 <= interHEX3 WHEN (endereco = "100000000001" AND habilita = '1');
 
-    HEX4 <= interHEX4 WHEN (endereco = "100000000010" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX4 <= interHEX4 WHEN (endereco = "100000000010" AND habilita = '1');
 
-    HEX5 <= interHEX5 WHEN (endereco = "100000000010" AND habilita = '1') ELSE
-        (OTHERS => 'Z');
+    HEX5 <= interHEX5 WHEN (endereco = "100000000010" AND habilita = '1');
 END ARCHITECTURE;
