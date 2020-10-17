@@ -37,6 +37,7 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL somaUm_out            : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
     SIGNAL muxImedDados_out      : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL ULA_out               : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL ULA_flagZero_out      : std_logic;
     SIGNAL bancoReg_out          : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL RAM_out               : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL controleDecodificador : std_logic_vector(5 DOWNTO 0);
@@ -154,7 +155,16 @@ BEGIN
             entradaA => bancoReg_out,
             seletor  => operacao,
             saida    => ULA_out,
-            flagZero => flagZero
+            flagZero => ULA_flagZero_out
+        );
+
+    registerFlagZero : ENTITY work.flipFlopGenerico
+        PORT MAP(
+            DIN    => ULA_flagZero_out,
+            DOUT   => flagZero,
+            ENABLE => '1',
+            CLK    => clk,
+            RST    => '0'
         );
 
     RAM : ENTITY work.memoriaRAM
@@ -202,6 +212,7 @@ BEGIN
             ADDR_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
+            clk      => clk,
             endereco => enderecoRAMROM,
             habilita => habBarramentoHex,
             dados    => bancoReg_out,
