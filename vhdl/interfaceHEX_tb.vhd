@@ -6,17 +6,24 @@ CONTEXT vunit_lib.vunit_context;
 
 ENTITY interfaceHEX_tb IS
     GENERIC (
-        runner_cfg : STRING := runner_cfg_default
+        runner_cfg : STRING  := runner_cfg_default;
+        DATA_WIDTH : NATURAL := 8;
+        ADDR_WIDTH : NATURAL := 12;
+        HEX_WIDTH  : NATURAL := 7
     );
 END ENTITY;
 
 ARCHITECTURE tb OF interfaceHEX_tb IS
-    -- Inputs and ouputs
-    SIGNAL enderecoRAMROM                                       : std_logic_vector(11 DOWNTO 0);
-    SIGNAL habBarramentoEscritaChaves                           : std_logic;
-    SIGNAL dados                                                : std_logic_vector(7 DOWNTO 0);
-    SIGNAL HEX0, HEX1, HEX2, HEX3, HEX4, HEX5                   : std_logic_vector(6 DOWNTO 0);
-    SIGNAL expHEX0, expHEX1, expHEX2, expHEX3, expHEX4, expHEX5 : std_logic_vector(6 DOWNTO 0);
+    -- Inputs ports
+    SIGNAL endereco : std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
+    SIGNAL habilita : std_logic;
+    SIGNAL dados    : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+
+    -- Output ports
+    SIGNAL HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0);
+
+    -- Expected outputs
+    SIGNAL expHEX0, expHEX1, expHEX2, expHEX3, expHEX4, expHEX5 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0);
 
     -- Clock
     CONSTANT CLK_PERIOD : TIME      := 1 ns;
@@ -36,8 +43,8 @@ BEGIN
             ADDR_WIDTH => 12
         )
         PORT MAP(
-            endereco => enderecoRAMROM,
-            habilita => habBarramentoEscritaChaves,
+            endereco => endereco,
+            habilita => habilita,
             dados    => dados,
             HEX0     => HEX0,
             HEX1     => HEX1,
@@ -53,15 +60,15 @@ BEGIN
 
         WHILE test_suite LOOP
             IF run("w1_hex0_hex1") THEN
-                enderecoRAMROM             <= "100000000000";
-                habBarramentoEscritaChaves <= '1';
-                dados                      <= "00000001";
-                expHEX0                    <= "1111001";
-                expHEX1                    <= "1000000";
-                expHEX2                    <= "ZZZZZZZ";
-                expHEX3                    <= "ZZZZZZZ";
-                expHEX4                    <= "ZZZZZZZ";
-                expHEX5                    <= "ZZZZZZZ";
+                endereco <= "100000000000";
+                habilita <= '1';
+                dados    <= "00000001";
+                expHEX0  <= "1111001";
+                expHEX1  <= "1000000";
+                expHEX2  <= "UUUUUUU";
+                expHEX3  <= "UUUUUUU";
+                expHEX4  <= "UUUUUUU";
+                expHEX5  <= "UUUUUUU";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);
@@ -70,15 +77,15 @@ BEGIN
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
             ELSIF run("w1_hex0_hex1_semHab") THEN
-                enderecoRAMROM             <= "100000000000";
-                habBarramentoEscritaChaves <= '0';
-                dados                      <= "00000001";
-                expHEX0                    <= "ZZZZZZZ";
-                expHEX1                    <= "ZZZZZZZ";
-                expHEX2                    <= "ZZZZZZZ";
-                expHEX3                    <= "ZZZZZZZ";
-                expHEX4                    <= "ZZZZZZZ";
-                expHEX5                    <= "ZZZZZZZ";
+                endereco <= "100000000000";
+                habilita <= '0';
+                dados    <= "00000001";
+                expHEX0  <= "UUUUUUU";
+                expHEX1  <= "UUUUUUU";
+                expHEX2  <= "UUUUUUU";
+                expHEX3  <= "UUUUUUU";
+                expHEX4  <= "UUUUUUU";
+                expHEX5  <= "UUUUUUU";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);
@@ -88,15 +95,15 @@ BEGIN
                 check_equal(HEX5, expHEX5);
 
             ELSIF run("w1_hex2_hex3") THEN
-                enderecoRAMROM             <= "100000000001";
-                habBarramentoEscritaChaves <= '1';
-                dados                      <= "00000001";
-                expHEX0                    <= "ZZZZZZZ";
-                expHEX1                    <= "ZZZZZZZ";
-                expHEX2                    <= "1111001";
-                expHEX3                    <= "1000000";
-                expHEX4                    <= "ZZZZZZZ";
-                expHEX5                    <= "ZZZZZZZ";
+                endereco <= "100000000001";
+                habilita <= '1';
+                dados    <= "00000001";
+                expHEX0  <= "UUUUUUU";
+                expHEX1  <= "UUUUUUU";
+                expHEX2  <= "1111001";
+                expHEX3  <= "1000000";
+                expHEX4  <= "UUUUUUU";
+                expHEX5  <= "UUUUUUU";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);
@@ -105,15 +112,15 @@ BEGIN
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
             ELSIF run("w1_hex2_hex3_semHab") THEN
-                enderecoRAMROM             <= "100000000001";
-                habBarramentoEscritaChaves <= '0';
-                dados                      <= "00000001";
-                expHEX0                    <= "ZZZZZZZ";
-                expHEX1                    <= "ZZZZZZZ";
-                expHEX2                    <= "ZZZZZZZ";
-                expHEX3                    <= "ZZZZZZZ";
-                expHEX4                    <= "ZZZZZZZ";
-                expHEX5                    <= "ZZZZZZZ";
+                endereco <= "100000000001";
+                habilita <= '0';
+                dados    <= "00000001";
+                expHEX0  <= "UUUUUUU";
+                expHEX1  <= "UUUUUUU";
+                expHEX2  <= "UUUUUUU";
+                expHEX3  <= "UUUUUUU";
+                expHEX4  <= "UUUUUUU";
+                expHEX5  <= "UUUUUUU";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);
@@ -123,15 +130,15 @@ BEGIN
                 check_equal(HEX5, expHEX5);
 
             ELSIF run("w1_hex4_hex5") THEN
-                enderecoRAMROM             <= "100000000010";
-                habBarramentoEscritaChaves <= '1';
-                dados                      <= "00000001";
-                expHEX0                    <= "ZZZZZZZ";
-                expHEX1                    <= "ZZZZZZZ";
-                expHEX2                    <= "ZZZZZZZ";
-                expHEX3                    <= "ZZZZZZZ";
-                expHEX4                    <= "1111001";
-                expHEX5                    <= "1000000";
+                endereco <= "100000000010";
+                habilita <= '1';
+                dados    <= "00000001";
+                expHEX0  <= "UUUUUUU";
+                expHEX1  <= "UUUUUUU";
+                expHEX2  <= "UUUUUUU";
+                expHEX3  <= "UUUUUUU";
+                expHEX4  <= "1111001";
+                expHEX5  <= "1000000";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);
@@ -140,15 +147,15 @@ BEGIN
                 check_equal(HEX4, expHEX4);
                 check_equal(HEX5, expHEX5);
             ELSIF run("w1_hex4_hex5_semHab") THEN
-                enderecoRAMROM             <= "100000000010";
-                habBarramentoEscritaChaves <= '0';
-                dados                      <= "00000001";
-                expHEX0                    <= "ZZZZZZZ";
-                expHEX1                    <= "ZZZZZZZ";
-                expHEX2                    <= "ZZZZZZZ";
-                expHEX3                    <= "ZZZZZZZ";
-                expHEX4                    <= "ZZZZZZZ";
-                expHEX5                    <= "ZZZZZZZ";
+                endereco <= "100000000010";
+                habilita <= '0';
+                dados    <= "00000001";
+                expHEX0  <= "UUUUUUU";
+                expHEX1  <= "UUUUUUU";
+                expHEX2  <= "UUUUUUU";
+                expHEX3  <= "UUUUUUU";
+                expHEX4  <= "UUUUUUU";
+                expHEX5  <= "UUUUUUU";
                 WAIT UNTIL clk = '1';
                 check_equal(HEX0, expHEX0);
                 check_equal(HEX1, expHEX1);

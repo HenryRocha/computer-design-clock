@@ -7,18 +7,25 @@ ENTITY interfaceChaves IS
         ADDR_WIDTH : NATURAL := 12
     );
     PORT (
+        -- Input ports
         entrada  : IN std_logic_vector(9 DOWNTO 0);
         endereco : IN std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         habilita : IN std_logic;
-        saida    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0)
+
+        -- Output ports
+        saida : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
 ARCHITECTURE main OF interfaceChaves IS
-    SIGNAL temp : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL saidaTemp : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
 BEGIN
+    -- Apenas o bit 0 da saída será usado. Foi feito desse modo para não ser necessário
+    -- o uso do estendeSinalGenerico.
+    -- O sinal de saída será o valor lido de cada chave, mas o valor de saída só será
+    -- substituido caso o endereço seja o correto e a interface esteja habilitada.
     WITH endereco SELECT
-        temp(0) <= entrada(0) WHEN "000000000000",
+        saidaTemp(0) <= entrada(0) WHEN "000000000000",
         entrada(1) WHEN "000000000001",
         entrada(2) WHEN "000000000010",
         entrada(3) WHEN "000000000011",
@@ -30,6 +37,6 @@ BEGIN
         entrada(9) WHEN "000000001010",
         '0' WHEN OTHERS;
 
-    saida <= temp WHEN (habilita = '1') ELSE
+    saida <= saidaTemp WHEN (habilita = '1') ELSE
         (OTHERS => 'Z');
 END ARCHITECTURE;
