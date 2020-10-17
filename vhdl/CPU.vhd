@@ -23,7 +23,9 @@ ENTITY CPU IS
         opULA_DEBUG             : OUT std_logic_vector(2 DOWNTO 0)              := (OTHERS => '-');
         opCode_DEBUG            : OUT std_logic_vector(3 DOWNTO 0)              := (OTHERS => '-');
         palavraControle_DEBUG   : OUT std_logic_vector(7 DOWNTO 0)              := (OTHERS => '-');
-        programCounter_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-')
+        programCounter_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        enderecoRAMROM_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        flagZero_DEBUG          : OUT std_logic
     );
 END ENTITY;
 
@@ -62,7 +64,8 @@ BEGIN
             saidaBancoRegs_DEBUG    => saidaBancoRegs_DEBUG,
             saidaULA_DEBUG          => saidaULA_DEBUG,
             saidaMuxImedDados_DEBUG => saidaMuxImedDados_DEBUG,
-            opULA_DEBUG             => opULA_DEBUG
+            opULA_DEBUG             => opULA_DEBUG,
+            enderecoRAMROM_DEBUG    => enderecoRAMROM_DEBUG
         );
 
     UC : ENTITY work.unidadeControle
@@ -80,4 +83,5 @@ BEGIN
     palavraControle_DEBUG <= palavraControle;
     programCounter_DEBUG  <= programCounter;
     opCode_DEBUG          <= opCode;
+    flagZero_DEBUG        <= flagZero;
 END ARCHITECTURE;
