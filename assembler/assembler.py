@@ -14,8 +14,12 @@ class Assembler():
         'JNE':	'1001',
         'JMP':	'1010',
         'OR':	'1011',
-        'AND':	'1100'
+        'AND':	'1100',
+        'CMP': '0010',
+        'CMPI': '0011'
     }
+
+    jumps = {}
 
     def __init__(self, file: str, output: str) -> None:
         self.commands = self.__read_file(file)
@@ -24,15 +28,21 @@ class Assembler():
         self.__save_file(self.instructions, output)
 
     def decode(self) -> str:
-        for command in self.commands:
+        for line, command in enumerate(self.commands):
+            structure = command[:-1].split()
+            if len(structure) == 1:
+                self.jumps[structure[0].upper()] = line
+        for line, command in enumerate(self.commands):
             structure = command[:-1].split()
             try:
                 opcode = self.opcode_decoder[structure[0].upper()]
             except KeyError:
-                raise KeyError('Invalid operation.')
+                if len(structure) > 1:
+                    raise KeyError('Invalid operation.')
+                continue
             if opcode in ['1000', '1001', '1010']:
                 reg = '000'
-                address = self.__decode_address(structure[1])
+                address = self.__decode_jump_address(structure[1], self.jumps)
             elif opcode != '0101':
                 reg = self.__decode_reg_address(structure[1][:-1])
                 address = self.__decode_address(structure[2])
@@ -56,6 +66,18 @@ class Assembler():
             raise ValueError('Invalid Register Number. Valid Number are 1-8')
         binary = bin(value - 1)[2:]
         return binary.zfill(3)
+    
+    @staticmethod
+    def __decode_jump_address(address: str, jumps: dict) -> str:
+        try:
+            value = int(address[1:], 16)
+        except:
+            try:
+                value = jumps[address]
+            except KeyError:
+                raise KeyError('Invalid Jump Label.')
+        binary = bin(value - 1)[2:]
+        return binary.zfill(3)
 
     @staticmethod
     def __read_file(file: str) -> list():
@@ -69,3 +91,5 @@ class Assembler():
         with open(output, 'w') as f:
             for line, instruction in enumerate(instructions):
                 f.write(f'\t\ttmp({line}) := \"{instruction}\";\n')
+
+Assembler('/Users/eller/insper/2020.2/descomp/computer-design-clock/assembler/debug.nasm', 'debug.txt')
