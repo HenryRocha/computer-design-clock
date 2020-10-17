@@ -3,6 +3,10 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 ENTITY unidadeControle IS
+    GENERIC (
+        OPCODE_WIDTH : NATURAL := 4;
+        NUM_INST     : NATURAL := 13
+    );
     PORT (
         -- Input ports
         clk      : IN std_logic;
@@ -26,7 +30,7 @@ ARCHITECTURE main OF unidadeControle IS
     -- O sinal "instrucao" é responsável por dizer qual instrução está sendo executada.
     -- Desse modo, ele é um vetor onde o tamanho é o número de instruções que o
     -- processador tem.
-    SIGNAL instrucao : std_logic_vector(12 DOWNTO 0);
+    SIGNAL instrucao : std_logic_vector(NUM_INST - 1 DOWNTO 0);
     -- Declarando qual bit do vetor é cada instrução.
     ALIAS add     : std_logic IS instrucao(0);
     ALIAS addi    : std_logic IS instrucao(1);
@@ -43,19 +47,19 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS instAND : std_logic IS instrucao(12);
 
     -- Declarando todas as intruções da CPU e seus OpCodes.
-    CONSTANT opcodeAdd  : std_logic_vector(3 DOWNTO 0) := "0000";
-    CONSTANT opcodeAddi : std_logic_vector(3 DOWNTO 0) := "0001";
-    CONSTANT opcodeSub  : std_logic_vector(3 DOWNTO 0) := "0010";
-    CONSTANT opcodeSubi : std_logic_vector(3 DOWNTO 0) := "0011";
-    CONSTANT opcodeMovm : std_logic_vector(3 DOWNTO 0) := "0100";
-    CONSTANT opcodeMovr : std_logic_vector(3 DOWNTO 0) := "0101";
-    CONSTANT opcodeLea  : std_logic_vector(3 DOWNTO 0) := "0110";
-    CONSTANT opcodeCmp  : std_logic_vector(3 DOWNTO 0) := "0111";
-    CONSTANT opcodeJE   : std_logic_vector(3 DOWNTO 0) := "1000";
-    CONSTANT opcodeJNE  : std_logic_vector(3 DOWNTO 0) := "1001";
-    CONSTANT opcodeJMP  : std_logic_vector(3 DOWNTO 0) := "1010";
-    CONSTANT opcodeOr   : std_logic_vector(3 DOWNTO 0) := "1011";
-    CONSTANT opcodeAnd  : std_logic_vector(3 DOWNTO 0) := "1100";
+    CONSTANT opcodeAdd  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0000";
+    CONSTANT opcodeAddi : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0001";
+    CONSTANT opcodeSub  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0010";
+    CONSTANT opcodeSubi : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0011";
+    CONSTANT opcodeMovm : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0100";
+    CONSTANT opcodeMovr : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0101";
+    CONSTANT opcodeLea  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0110";
+    CONSTANT opcodeCmp  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0111";
+    CONSTANT opcodeJE   : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1000";
+    CONSTANT opcodeJNE  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1001";
+    CONSTANT opcodeJMP  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1010";
+    CONSTANT opcodeOr   : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1011";
+    CONSTANT opcodeAnd  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1100";
 BEGIN
     -- Verificando qual a instrução a ser executada.
     WITH opcode SELECT
