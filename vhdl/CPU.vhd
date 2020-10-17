@@ -4,21 +4,26 @@ USE ieee.numeric_std.ALL;
 
 ENTITY CPU IS
     GENERIC (
-        DATA_WIDTH : NATURAL := 16;
+        DATA_WIDTH : NATURAL := 8;
         ADDR_WIDTH : NATURAL := 12
     );
     PORT (
         -- Input ports
-        clk                                : IN std_logic;
-        sw                                 : IN std_logic_vector(9 DOWNTO 0);
-        key                                : IN std_logic_vector(3 DOWNTO 0);
-        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0)  := (OTHERS => '-');
-        saidaBancoRegsOUT                  : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
-        opCodeOUT                          : OUT std_logic_vector(3 DOWNTO 0)  := (OTHERS => '-');
-        palavraControleOUT                 : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
-        programCounterOUT                  : OUT std_logic_vector(11 DOWNTO 0) := (OTHERS => '-');
-        ULAOUT                             : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-');
-        muxImedDados                       : OUT std_logic_vector(7 DOWNTO 0)  := (OTHERS => '-')
+        clk : IN std_logic;
+        sw  : IN std_logic_vector(9 DOWNTO 0);
+        key : IN std_logic_vector(3 DOWNTO 0);
+
+        -- Output ports
+        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-');
+
+        -- Saidas para debugging
+        saidaBancoRegs_DEBUG    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        saidaULA_DEBUG          : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        saidaMuxImedDados_DEBUG : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        opULA_DEBUG             : OUT std_logic_vector(2 DOWNTO 0)              := (OTHERS => '-');
+        opCode_DEBUG            : OUT std_logic_vector(3 DOWNTO 0)              := (OTHERS => '-');
+        palavraControle_DEBUG   : OUT std_logic_vector(7 DOWNTO 0)              := (OTHERS => '-');
+        programCounter_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -36,34 +41,43 @@ BEGIN
             ADDR_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
+            -- Inputs
             clk             => clk,
             sw              => sw,
             key             => key,
             palavraControle => palavraControle,
-            flagZero        => flagZero,
-            opCode          => opCode,
-            programCounter  => programCounter,
-            saidaBancoRegs  => saidaBancoRegs,
-            ULAOUT          => ULAOUT,
-            muxImedDados    => muxImedDados,
-            HEX0            => HEX0,
-            HEX1            => HEX1,
-            HEX2            => HEX2,
-            HEX3            => HEX3,
-            HEX4            => HEX4,
-            HEX5            => HEX5
+
+            -- Outputs
+            flagZero       => flagZero,
+            opCode         => opCode,
+            programCounter => programCounter,
+            HEX0           => HEX0,
+            HEX1           => HEX1,
+            HEX2           => HEX2,
+            HEX3           => HEX3,
+            HEX4           => HEX4,
+            HEX5           => HEX5,
+
+            -- Saidas para debugging
+            saidaBancoRegs_DEBUG    => saidaBancoRegs_DEBUG,
+            saidaULA_DEBUG          => saidaULA_DEBUG,
+            saidaMuxImedDados_DEBUG => saidaMuxImedDados_DEBUG,
+            opULA_DEBUG             => opULA_DEBUG
         );
 
     UC : ENTITY work.unidadeControle
         PORT MAP(
-            palavraControle => palavraControle,
-            flagZero        => flagZero,
-            opCode          => opCode,
-            clk             => clk
+            -- Inputs
+            clk      => clk,
+            opCode   => opCode,
+            flagZero => flagZero,
+
+            -- Outputs
+            palavraControle => palavraControle
         );
 
-    palavraControleOUT <= palavraControle;
-    saidaBancoRegsOUT  <= saidaBancoRegs;
-    programCounterOUT  <= programCounter;
-    opCodeOUT          <= opCode;
+    -- Saidas para debugging
+    palavraControle_DEBUG <= palavraControle;
+    programCounter_DEBUG  <= programCounter;
+    opCode_DEBUG          <= opCode;
 END ARCHITECTURE;
