@@ -4,26 +4,30 @@ USE ieee.std_logic_1164.ALL;
 ENTITY interfaceHEX IS
     GENERIC (
         DATA_WIDTH : NATURAL := 8;
-        ADDR_WIDTH : NATURAL := 8
+        ADDR_WIDTH : NATURAL := 8;
+        HEX_WIDTH  : NATURAL := 7
     );
     PORT (
         -- Input ports
         endereco : IN std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
         habilita : IN std_logic := '0';
         dados    : IN std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+
         -- Output ports
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0)
     );
 END ENTITY;
 
 ARCHITECTURE main OF interfaceHEX IS
-    SIGNAL interHEX0 : std_logic_vector(6 DOWNTO 0);
-    SIGNAL interHEX1 : std_logic_vector(6 DOWNTO 0);
-    SIGNAL interHEX2 : std_logic_vector(6 DOWNTO 0);
-    SIGNAL interHEX3 : std_logic_vector(6 DOWNTO 0);
-    SIGNAL interHEX4 : std_logic_vector(6 DOWNTO 0);
-    SIGNAL interHEX5 : std_logic_vector(6 DOWNTO 0);
+    -- Declarando todos os sinais intermediários.
+    SIGNAL interHEX0 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX1 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX2 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX3 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX4 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
+    SIGNAL interHEX5 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "0000000";
 BEGIN
+    -- Declarando todos os conversores de 7 segmentos.
     conversorHex0 : ENTITY work.conversorHex7Seg
         PORT MAP(
             dadoHex   => dados(3 DOWNTO 0),
@@ -77,6 +81,8 @@ BEGIN
             saida7seg => interHEX5
         );
 
+    -- Cada display só será escrito caso o endereço seja o referente aquela
+    -- dupla de display. 
     HEX0 <= interHEX0 WHEN (endereco = "100000000000" AND habilita = '1') ELSE
         (OTHERS => 'Z');
 
