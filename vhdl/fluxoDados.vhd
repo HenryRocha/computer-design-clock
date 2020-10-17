@@ -21,6 +21,7 @@ ENTITY fluxoDados IS
         saidaBancoRegs                     : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
         ULAOUT                             : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
         muxImedDados                       : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+        opUla                              : OUT std_logic_vector(2 DOWNTO 0);
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
@@ -146,8 +147,8 @@ BEGIN
             larguraDados => DATA_WIDTH
         )
         PORT MAP(
-            entradaA => muxImedDados_out,
-            entradaB => bancoReg_out,
+            entradaB => muxImedDados_out,
+            entradaA => bancoReg_out,
             seletor  => operacao,
             saida    => ULA_out,
             flagZero => flagZero
@@ -225,4 +226,5 @@ BEGIN
     saidaBancoRegs <= bancoReg_out;
     ULAOUT         <= ULA_out;
     muxImedDados   <= muxImedDados_out;
+    opUla          <= operacao;
 END ARCHITECTURE;
