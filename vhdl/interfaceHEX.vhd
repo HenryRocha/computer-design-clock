@@ -1,3 +1,7 @@
+-- Henry Rocha
+-- Vitor Eller
+-- SÃ£o Paulo, 11 de Outubro de 2020
+
 LIBRARY IEEE;
 USE ieee.std_logic_1164.ALL;
 
@@ -20,7 +24,7 @@ ENTITY interfaceHEX IS
 END ENTITY;
 
 ARCHITECTURE main OF interfaceHEX IS
-    -- Declarando todos os sinais intermediários.
+    -- Declarando todos os sinais intermediï¿½rios.
     SIGNAL interHEX0 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
     SIGNAL interHEX1 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
     SIGNAL interHEX2 : std_logic_vector(HEX_WIDTH - 1 DOWNTO 0) := "1111111";
@@ -37,60 +41,90 @@ ARCHITECTURE main OF interfaceHEX IS
     SIGNAL habHEX5 : std_logic;
 BEGIN
     -- Declarando todos os conversores de 7 segmentos.
-    conversorHex0 : ENTITY work.conversorHex7Seg
+    -- conversorHex0 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(3 DOWNTO 0),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX0
+    --     );
+
+    -- conversorHex1 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(7 DOWNTO 4),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX1
+    --     );
+
+    -- conversorHex2 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(3 DOWNTO 0),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX2
+    --     );
+
+    -- conversorHex3 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(7 DOWNTO 4),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX3
+    --     );
+
+    -- conversorHex4 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(3 DOWNTO 0),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX4);
+
+    -- conversorHex5 : ENTITY work.conversorHex7Seg
+    --     PORT MAP(
+    --         dadoHex   => dados(7 DOWNTO 4),
+    --         apaga     => '0',
+    --         negativo  => '0',
+    --         overFlow  => '0',
+    --         saida7seg => interHEX5
+    --     );
+
+    conversorHex0 : ENTITY work.hexToDecimalDisplay
         PORT MAP(
-            dadoHex   => dados(3 DOWNTO 0),
+            dadoHex   => dados,
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX0
+            saida7seg1 => interHEX1,
+            saida7seg2 => interHEX0
+        );
+    
+    conversorHex1 : ENTITY work.hexToDecimalDisplay
+        PORT MAP(
+            dadoHex   => dados,
+            apaga     => '0',
+            negativo  => '0',
+            overFlow  => '0',
+            saida7seg1 => interHEX3,
+            saida7seg2 => interHEX2
         );
 
-    conversorHex1 : ENTITY work.conversorHex7Seg
+    conversorHex2 : ENTITY work.hexToDecimalDisplay
         PORT MAP(
-            dadoHex   => dados(7 DOWNTO 4),
+            dadoHex   => dados,
             apaga     => '0',
             negativo  => '0',
             overFlow  => '0',
-            saida7seg => interHEX1
+            saida7seg1 => interHEX5,
+            saida7seg2 => interHEX4
         );
 
-    conversorHex2 : ENTITY work.conversorHex7Seg
-        PORT MAP(
-            dadoHex   => dados(3 DOWNTO 0),
-            apaga     => '0',
-            negativo  => '0',
-            overFlow  => '0',
-            saida7seg => interHEX2
-        );
-
-    conversorHex3 : ENTITY work.conversorHex7Seg
-        PORT MAP(
-            dadoHex   => dados(7 DOWNTO 4),
-            apaga     => '0',
-            negativo  => '0',
-            overFlow  => '0',
-            saida7seg => interHEX3
-        );
-
-    conversorHex4 : ENTITY work.conversorHex7Seg
-        PORT MAP(
-            dadoHex   => dados(3 DOWNTO 0),
-            apaga     => '0',
-            negativo  => '0',
-            overFlow  => '0',
-            saida7seg => interHEX4);
-
-    conversorHex5 : ENTITY work.conversorHex7Seg
-        PORT MAP(
-            dadoHex   => dados(7 DOWNTO 4),
-            apaga     => '0',
-            negativo  => '0',
-            overFlow  => '0',
-            saida7seg => interHEX5
-        );
-
-    -- Cada display só será escrito caso o endereço seja o referente aquela
+    -- Cada display sï¿½ serï¿½ escrito caso o endereï¿½o seja o referente aquela
     -- dupla de display.
     habHEX0 <= '1' WHEN (endereco = "100000000000" AND habilita = '1') ELSE
         '0';
