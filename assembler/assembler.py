@@ -15,8 +15,7 @@ class Assembler():
         'JMP':	'1010',
         'OR':	'1011',
         'AND':	'1100',
-        'CMP': '0010',
-        'CMPI': '0011'
+        'CMP':  '0111',
     }
 
     jumps = {}
