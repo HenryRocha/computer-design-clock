@@ -26,18 +26,7 @@ ENTITY fluxoDados IS
         flagZero                           : OUT std_logic;
         opCode                             : OUT std_logic_vector(3 DOWNTO 0);
         programCounter                     : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
-        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-');
-
-        -- Saidas para debugging
-        saidaBancoRegs_DEBUG              : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-        saidaULA_DEBUG                    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-        saidaMuxImedDados_DEBUG           : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-        opULA_DEBUG                       : OUT std_logic_vector(2 DOWNTO 0);
-        enderecoRAMROM_DEBUG              : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0);
-        habBarramentoBaseTempo_DEBUG      : OUT std_logic;
-        habBarramentoLimpaBaseTempo_DEBUG : OUT std_logic;
-        barramentoEntradaDados_DEBUG      : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
-        controleDecodificador_DEBUG       : OUT std_logic_vector(5 DOWNTO 0)
+        HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-')
     );
 END ENTITY;
 
@@ -251,15 +240,4 @@ BEGIN
 
     programCounter <= pc_out;
     opCode         <= instOpCode;
-
-    -- Saidas para debugging
-    saidaBancoRegs_DEBUG              <= bancoReg_out;
-    saidaULA_DEBUG                    <= ULA_out;
-    saidaMuxImedDados_DEBUG           <= muxImedDados_out;
-    opULA_DEBUG                       <= operacao;
-    enderecoRAMROM_DEBUG              <= enderecoRAMROM;
-    habBarramentoBaseTempo_DEBUG      <= habBarramentoBaseTempo;
-    habBarramentoLimpaBaseTempo_DEBUG <= habBarramentoLimpaBaseTempo;
-    barramentoEntradaDados_DEBUG      <= barramentoEntradaDados;
-    controleDecodificador_DEBUG       <= controleDecodificador;
 END ARCHITECTURE;
