@@ -1,6 +1,14 @@
+-- Henry Rocha
+-- Vitor Eller
+-- SÃ£o Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; -- Biblioteca IEEE para funÃ§Ãµes aritmÃ©ticas
+
+-- A ULA Ã© responsÃ¡vel por realizar as operaÃ§Ãµes entre as entradas da instruÃ§Ã£o passada
+-- Ela sempre realiza a operaÃ§Ã£o entre a saÃ­da dos registradores e o valor em um endereÃ§o de memÃ³ria ou do imediato passado pela instruÃ§Ã£o
+-- Sua saÃ­da sempre serÃ¡ enviada para o banco de registradores (esse mapeamento pode ser visto no Fluxo de Dados)
 
 ENTITY ULA IS
     GENERIC (
@@ -20,10 +28,10 @@ ENTITY ULA IS
 END ENTITY;
 
 ARCHITECTURE comportamento OF ULA IS
-    -- Declarando a constante "zero", usada para determinar se a saída é zero ou não.
+    -- Declarando a constante "zero", usada para determinar se a saï¿½da ï¿½ zero ou nï¿½o.
     CONSTANT zero : std_logic_vector(larguraDados - 1 DOWNTO 0) := (OTHERS => '0');
 
-    -- Todas as operações que a ULA consegue realizar.
+    -- Todas as operaï¿½ï¿½es que a ULA consegue realizar.
     SIGNAL op_soma_zero   : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
     SIGNAL op_soma        : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
     SIGNAL op_soma_b_zero : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -32,10 +40,10 @@ ARCHITECTURE comportamento OF ULA IS
     SIGNAL op_or          : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
     SIGNAL op_and         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 
-    -- Sinal temporário usado durante a comparação com a constante "zero".
+    -- Sinal temporï¿½rio usado durante a comparaï¿½ï¿½o com a constante "zero".
     SIGNAL saidaTemp : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 BEGIN
-    -- Realizando todas as operações.
+    -- Realizando todas as operaï¿½ï¿½es.
     op_soma_zero   <= zero;
     op_soma        <= STD_LOGIC_VECTOR(unsigned(entradaA) + unsigned(entradaB));
     op_soma_b_zero <= STD_LOGIC_VECTOR(unsigned(entradaB));
@@ -44,7 +52,7 @@ BEGIN
     op_and         <= entradaA AND entradaB;
     op_or          <= entradaA OR entradaB;
 
-    -- Verificando qual operação deve ser atribuída a "saidaTemp".
+    -- Verificando qual operaï¿½ï¿½o deve ser atribuï¿½da a "saidaTemp".
     saidaTemp <= op_soma_zero WHEN (seletor = "000") ELSE
         op_soma WHEN (seletor = "001") ELSE
         op_sub WHEN (seletor = "010") ELSE
@@ -54,8 +62,8 @@ BEGIN
         op_and WHEN (seletor = "110") ELSE
         entradaA;
 
-    -- Atribuindo "saida" a "saidaTemp" e realizando a comparação para verificar se
-    -- o resultado é zero.
+    -- Atribuindo "saida" a "saidaTemp" e realizando a comparaï¿½ï¿½o para verificar se
+    -- o resultado ï¿½ zero.
     saida    <= saidaTemp;
     flagZero <= '1' WHEN unsigned(saidaTemp) = unsigned(zero) ELSE
         '0';

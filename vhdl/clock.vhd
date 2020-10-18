@@ -1,5 +1,11 @@
+-- Henry Rocha
+-- Vitor Eller
+-- São Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+
+-- Top Level do projeto. Mapeia a CPU e as entradas e saídas da placa
 
 ENTITY clock IS
     GENERIC (

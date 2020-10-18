@@ -1,6 +1,14 @@
+-- Henry Rocha
+-- Vitor Eller
+-- SÃ£o Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
+
+-- A unidade de controle Ã© responsÃ¡vel por gerar os pontos de controle com base na instruÃ§Ã£o sendo utilizada
+-- A instruÃ§Ã£o Ã© interpretada baseada no OpCode passado
+-- Com isso, geramos um vetor de 8 bits, onde cada um representa um ponto de controle
 
 ENTITY unidadeControle IS
     GENERIC (
@@ -19,7 +27,7 @@ ENTITY unidadeControle IS
 END ENTITY;
 
 ARCHITECTURE main OF unidadeControle IS
-    -- Declarando onde cada ponto de controle será localizado na palavra de controle.
+    -- Declarando onde cada ponto de controle serï¿½ localizado na palavra de controle.
     ALIAS muxProxPC     : std_logic IS palavraControle(7);
     ALIAS muxImedDados  : std_logic IS palavraControle(6);
     ALIAS habEscritaReg : std_logic IS palavraControle(5);
@@ -27,11 +35,11 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS habLeituraRAM : std_logic IS palavraControle(1);
     ALIAS habEscritaRAM : std_logic IS palavraControle(0);
 
-    -- O sinal "instrucao" é responsável por dizer qual instrução está sendo executada.
-    -- Desse modo, ele é um vetor onde o tamanho é o número de instruções que o
+    -- O sinal "instrucao" ï¿½ responsï¿½vel por dizer qual instruï¿½ï¿½o estï¿½ sendo executada.
+    -- Desse modo, ele ï¿½ um vetor onde o tamanho ï¿½ o nï¿½mero de instruï¿½ï¿½es que o
     -- processador tem.
     SIGNAL instrucao : std_logic_vector(NUM_INST - 1 DOWNTO 0);
-    -- Declarando qual bit do vetor é cada instrução.
+    -- Declarando qual bit do vetor ï¿½ cada instruï¿½ï¿½o.
     ALIAS add     : std_logic IS instrucao(0);
     ALIAS addi    : std_logic IS instrucao(1);
     ALIAS sub     : std_logic IS instrucao(2);
@@ -46,7 +54,7 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS instOR  : std_logic IS instrucao(11);
     ALIAS instAND : std_logic IS instrucao(12);
 
-    -- Declarando todas as intruções da CPU e seus OpCodes.
+    -- Declarando todas as intruï¿½ï¿½es da CPU e seus OpCodes.
     CONSTANT opcodeAdd  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0000";
     CONSTANT opcodeAddi : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0001";
     CONSTANT opcodeSub  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0010";
@@ -61,7 +69,7 @@ ARCHITECTURE main OF unidadeControle IS
     CONSTANT opcodeOr   : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1011";
     CONSTANT opcodeAnd  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "1100";
 BEGIN
-    -- Verificando qual a instrução a ser executada.
+    -- Verificando qual a instruï¿½ï¿½o a ser executada.
     WITH opcode SELECT
         instrucao <= "0000000000001" WHEN opcodeAdd,
         "0000000000010" WHEN opcodeAddi,
@@ -78,8 +86,8 @@ BEGIN
         "1000000000000" WHEN opcodeAnd,
         "0000000000000" WHEN OTHERS;
 
-    -- Toda a lógica a seguir foi feita a partir da tabela INSTRUÇÃO x PONTO DE CONTROLE.
-    -- Um link para essa tabela está disponível no README.md do repositório do projeto.
+    -- Toda a lï¿½gica a seguir foi feita a partir da tabela INSTRUï¿½ï¿½O x PONTO DE CONTROLE.
+    -- Um link para essa tabela estï¿½ disponï¿½vel no README.md do repositï¿½rio do projeto.
     muxProxPC <= jmp OR (je AND flagZero) OR (jne AND (NOT flagZero));
 
     muxImedDados <= add OR sub OR movm OR instOR OR instAND;

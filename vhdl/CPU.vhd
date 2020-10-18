@@ -1,6 +1,12 @@
+-- Henry Rocha
+-- Vitor Eller
+-- São Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
+
+-- A CPU consolida o fluxo de dados e a decodificação do OpCode
 
 ENTITY CPU IS
     GENERIC (
@@ -41,6 +47,7 @@ ARCHITECTURE main OF CPU IS
 
     SIGNAL saidaBancoRegs : std_logic_vector(7 DOWNTO 0);
 BEGIN
+    -- Entidade fluxo de dados gerencia todo o fluxo de dados da arquitetura
     FD : ENTITY work.fluxoDados
         GENERIC MAP(
             DATA_WIDTH => DATA_WIDTH,
@@ -76,6 +83,7 @@ BEGIN
             controleDecodificador_DEBUG       => controleDecodificador_DEBUG
         );
 
+    -- Decodifica o opCode para gerar os pontos de controles
     UC : ENTITY work.unidadeControle
         PORT MAP(
             -- Inputs

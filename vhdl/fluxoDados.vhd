@@ -1,6 +1,13 @@
+-- Henry Rocha
+-- Vitor Eller
+-- São Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
+
+-- O Fluxo de Dados gerencia os dados que transitam pela arquitetura
+-- Representa o fluxo mostrado pelo diagrama de conexão presente no descritivo da arquitetura.
 
 ENTITY fluxoDados IS
     GENERIC (

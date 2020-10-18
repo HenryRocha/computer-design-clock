@@ -1,6 +1,12 @@
+-- Henry Rocha
+-- Vitor Eller
+-- São Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
+
+-- A Base de Tempo é responsável por indicar ao processador se um segundo já se passou, possibilitando a alteração do horário do relógio
 
 ENTITY baseDeTempo IS
     GENERIC (

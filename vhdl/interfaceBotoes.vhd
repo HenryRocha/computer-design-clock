@@ -1,3 +1,7 @@
+-- Henry Rocha
+-- Vitor Eller
+-- SÃ£o Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
@@ -21,10 +25,10 @@ END ENTITY;
 ARCHITECTURE main OF interfaceBotoes IS
     SIGNAL saidaTemp : std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
 BEGIN
-    -- Apenas o bit 0 da saída será usado. Foi feito desse modo para não ser necessário
+    -- Apenas o bit 0 da saï¿½da serï¿½ usado. Foi feito desse modo para nï¿½o ser necessï¿½rio
     -- o uso do estendeSinalGenerico.
-    -- O sinal de saída será o valor lido de cada chave, mas o valor de saída só será
-    -- substituido caso o endereço seja o correto e a interface esteja habilitada.
+    -- O sinal de saï¿½da serï¿½ o valor lido de cada chave, mas o valor de saï¿½da sï¿½ serï¿½
+    -- substituido caso o endereï¿½o seja o correto e a interface esteja habilitada.
     WITH endereco SELECT
         saidaTemp(0) <= entrada(0) WHEN "000000001010",
         entrada(1) WHEN "000000001011",

@@ -1,6 +1,13 @@
+-- Henry Rocha
+-- Vitor Eller
+-- S√£o Paulo, 11 de Outubro de 2020
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
+
+-- O decodificador de endere√ßos recebe o endere√ßo imediato e gera os sinais de habilita√ß√£o para os perif√©ricos
+-- Esses sinais s√£o respons√°veis por indicar qual perif√©rico est√° em opera√ß√£o de acordo com a instru√ß√£o utilizada
 
 ENTITY decodificador IS
     GENERIC (
@@ -22,10 +29,10 @@ ARCHITECTURE comportamento OF decodificador IS
     -- Sinal usado para guardar o valor do seletor em decimal.
     SIGNAL numSeletor : unsigned(DATA_WIDTH - 1 DOWNTO 0);
 
-    -- Vari·vel que indica se deve habilitar as interfaces ou n„o.
+    -- VariÔøΩvel que indica se deve habilitar as interfaces ou nÔøΩo.
     SIGNAL deveHabilitar : std_logic;
 
-    -- Declarando todas as intruÁıes da CPU e seus OpCodes.
+    -- Declarando todas as intruÔøΩÔøΩes da CPU e seus OpCodes.
     CONSTANT opcodeAdd  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0000";
     CONSTANT opcodeAddi : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0001";
     CONSTANT opcodeSub  : std_logic_vector(OPCODE_WIDTH - 1 DOWNTO 0) := "0010";
@@ -43,11 +50,11 @@ BEGIN
     -- Tranformando o seletor recebido em decimal.
     numSeletor(DATA_WIDTH - 1 DOWNTO 0) <= unsigned(seletor);
 
-    -- Decide se habilita o decodificador baseado na instruÁ„o sendo executada.
+    -- Decide se habilita o decodificador baseado na instruÔøΩÔøΩo sendo executada.
     deveHabilitar <= '1' WHEN (opCode = opcodeMovm);
 
-    -- Verificando qual instruÁ„o deve ser executada. Dependendo de qual for
-    -- n„o devemos habilitar nenhuma interface.
+    -- Verificando qual instruÔøΩÔøΩo deve ser executada. Dependendo de qual for
+    -- nÔøΩo devemos habilitar nenhuma interface.
     habilita(0) <= '1' WHEN (numSeletor >= 3072) ELSE
     '0';
 
