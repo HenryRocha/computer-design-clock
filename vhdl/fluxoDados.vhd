@@ -238,6 +238,7 @@ BEGIN
             clk              => clk,
             habilitaLeitura  => habBarramentoBaseTempo,
             limpaLeitura     => habBarramentoLimpaBaseTempo,
+            seletorClk       => sw(9),
             leituraUmSegundo => barramentoEntradaDados
         );
 

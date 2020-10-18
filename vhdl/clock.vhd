@@ -51,7 +51,7 @@ BEGIN
         )
         PORT MAP(
             -- Inputs
-            clk => clk,
+            clk => CLOCK_50,
             sw  => SW,
             key => KEY,
 
