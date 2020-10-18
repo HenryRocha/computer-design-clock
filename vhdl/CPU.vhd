@@ -17,15 +17,19 @@ ENTITY CPU IS
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT std_logic_vector(6 DOWNTO 0) := (OTHERS => '-');
 
         -- Saidas para debugging
-        saidaBancoRegs_DEBUG    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
-        saidaULA_DEBUG          : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
-        saidaMuxImedDados_DEBUG : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
-        opULA_DEBUG             : OUT std_logic_vector(2 DOWNTO 0)              := (OTHERS => '-');
-        opCode_DEBUG            : OUT std_logic_vector(3 DOWNTO 0)              := (OTHERS => '-');
-        palavraControle_DEBUG   : OUT std_logic_vector(7 DOWNTO 0)              := (OTHERS => '-');
-        programCounter_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
-        enderecoRAMROM_DEBUG    : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
-        flagZero_DEBUG          : OUT std_logic
+        saidaBancoRegs_DEBUG              : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        saidaULA_DEBUG                    : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        saidaMuxImedDados_DEBUG           : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        opULA_DEBUG                       : OUT std_logic_vector(2 DOWNTO 0)              := (OTHERS => '-');
+        opCode_DEBUG                      : OUT std_logic_vector(3 DOWNTO 0)              := (OTHERS => '-');
+        palavraControle_DEBUG             : OUT std_logic_vector(7 DOWNTO 0)              := (OTHERS => '-');
+        programCounter_DEBUG              : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        enderecoRAMROM_DEBUG              : OUT std_logic_vector(ADDR_WIDTH - 1 DOWNTO 0) := (OTHERS => '-');
+        flagZero_DEBUG                    : OUT std_logic;
+        habBarramentoBaseTempo_DEBUG      : OUT std_logic;
+        habBarramentoLimpaBaseTempo_DEBUG : OUT std_logic;
+        barramentoEntradaDados_DEBUG      : OUT std_logic_vector(DATA_WIDTH - 1 DOWNTO 0);
+        controleDecodificador_DEBUG       : OUT std_logic_vector(5 DOWNTO 0)
     );
 END ENTITY;
 
@@ -61,11 +65,15 @@ BEGIN
             HEX5           => HEX5,
 
             -- Saidas para debugging
-            saidaBancoRegs_DEBUG    => saidaBancoRegs_DEBUG,
-            saidaULA_DEBUG          => saidaULA_DEBUG,
-            saidaMuxImedDados_DEBUG => saidaMuxImedDados_DEBUG,
-            opULA_DEBUG             => opULA_DEBUG,
-            enderecoRAMROM_DEBUG    => enderecoRAMROM_DEBUG
+            saidaBancoRegs_DEBUG              => saidaBancoRegs_DEBUG,
+            saidaULA_DEBUG                    => saidaULA_DEBUG,
+            saidaMuxImedDados_DEBUG           => saidaMuxImedDados_DEBUG,
+            opULA_DEBUG                       => opULA_DEBUG,
+            enderecoRAMROM_DEBUG              => enderecoRAMROM_DEBUG,
+            habBarramentoBaseTempo_DEBUG      => habBarramentoBaseTempo_DEBUG,
+            habBarramentoLimpaBaseTempo_DEBUG => habBarramentoLimpaBaseTempo_DEBUG,
+            barramentoEntradaDados_DEBUG      => barramentoEntradaDados_DEBUG,
+            controleDecodificador_DEBUG       => controleDecodificador_DEBUG
         );
 
     UC : ENTITY work.unidadeControle
