@@ -1,3 +1,8 @@
+# Henry Rocha
+# Vitor Eller
+# São Paulo, 11 de Outubro de 2020
+
+import argparse
 
 class Assembler():
 
@@ -23,8 +28,11 @@ class Assembler():
     def __init__(self, file: str, output: str) -> None:
         self.commands = self.__read_file(file)
         self.instructions = []
+        self.output = output
+
+    def generate_assemble(self) -> None:
         self.decode()
-        self.__save_file(self.instructions, output)
+        self.__save_file(self.instructions, self.output)
 
     def decode(self) -> str:
         for line, command in enumerate(self.commands):
@@ -32,7 +40,11 @@ class Assembler():
             if len(structure) == 1:
                 self.jumps[structure[0].upper()] = line + 1 - len(self.jumps.keys())
         for line, command in enumerate(self.commands):
-            structure = command[:-1].split()
+            command = command.strip()
+            if command[-1] == ';':
+                structure = command[:-1].split()
+            else:
+                structure = command.split()
             try:
                 opcode = self.opcode_decoder[structure[0].upper()]
             except KeyError:
@@ -94,3 +106,13 @@ class Assembler():
         with open(output, 'w') as f:
             for line, instruction in enumerate(instructions):
                 f.write(f'\t\ttmp({line}) := \"{instruction[:4]}\" & \"{instruction[4:7]}\" & \"{instruction[7:]}\";\n')
+
+if __name__ == '__main__':
+    argparse = argparse.ArgumentParser()
+    argparse.add_argument('-i', '--input', default="./input.nasm", required=True)
+    argparse.add_argument('-o', '--output', default="./output.txt", required=True)
+
+    args = argparse.parse_args()
+    
+    assembler = Assembler(args.input, args.output)
+    assembler.generate_assemble()
