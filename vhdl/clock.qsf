@@ -240,11 +240,11 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_FILE hexToDecimalDisplay.vhd
 set_global_assignment -name VHDL_FILE baseDeTempo.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_global_assignment -name VHDL_FILE flipFlopGenerico.vhd
 set_global_assignment -name VHDL_FILE edgeDetector.vhd
 set_global_assignment -name SDC_FILE clock.sdc
 set_global_assignment -name VHDL_FILE ULA.vhd
-set_global_assignment -name VHDL_FILE divisorGenerico.vhd
 set_global_assignment -name VHDL_FILE bancoRegistradores.vhd
 set_global_assignment -name VHDL_FILE conversorHex7Seg.vhd
 set_global_assignment -name VHDL_FILE memoriaROM.vhd
@@ -258,10 +258,7 @@ set_global_assignment -name VHDL_FILE registradorGenerico.vhd
 set_global_assignment -name VHDL_FILE muxGenerico2x1.vhd
 set_global_assignment -name VHDL_FILE interfaceBotoes.vhd
 set_global_assignment -name VHDL_FILE fluxoDados.vhd
-set_global_assignment -name VHDL_FILE dividorGenerico_e_Interface.vhd
 set_global_assignment -name VHDL_FILE unidadeControle.vhd
 set_global_assignment -name VHDL_FILE CPU.vhd
 set_global_assignment -name VHDL_FILE clock.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform5.vwf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
