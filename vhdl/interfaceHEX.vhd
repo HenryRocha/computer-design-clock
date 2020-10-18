@@ -41,59 +41,6 @@ ARCHITECTURE main OF interfaceHEX IS
     SIGNAL habHEX5 : std_logic;
 BEGIN
     -- Declarando todos os conversores de 7 segmentos.
-    -- conversorHex0 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(3 DOWNTO 0),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX0
-    --     );
-
-    -- conversorHex1 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(7 DOWNTO 4),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX1
-    --     );
-
-    -- conversorHex2 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(3 DOWNTO 0),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX2
-    --     );
-
-    -- conversorHex3 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(7 DOWNTO 4),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX3
-    --     );
-
-    -- conversorHex4 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(3 DOWNTO 0),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX4);
-
-    -- conversorHex5 : ENTITY work.conversorHex7Seg
-    --     PORT MAP(
-    --         dadoHex   => dados(7 DOWNTO 4),
-    --         apaga     => '0',
-    --         negativo  => '0',
-    --         overFlow  => '0',
-    --         saida7seg => interHEX5
-    --     );
-
     conversorHex0 : ENTITY work.hexToDecimalDisplay
         PORT MAP(
             dadoHex   => dados,
