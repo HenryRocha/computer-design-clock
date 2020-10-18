@@ -230,7 +230,7 @@ BEGIN
             HEX5     => HEX5
         );
 
-    interfaceBaseTempo : ENTITY work.divisorGenerico_e_Interface
+    interfaceBaseTempo : ENTITY work.baseDeTempo
         GENERIC MAP(
             DATA_WIDTH => DATA_WIDTH
         )
