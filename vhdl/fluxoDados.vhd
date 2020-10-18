@@ -120,6 +120,7 @@ BEGIN
         )
         PORT MAP(
             seletor  => enderecoRAMROM,
+            opCode   => instOpCode,
             habilita => controleDecodificador
         );
 
