@@ -17,10 +17,16 @@ END ENTITY;
 
 ARCHITECTURE main OF flipFlopGenerico IS
 BEGIN
-    PROCESS (CLK)
+    PROCESS (RST, CLK)
     BEGIN
-        IF (rising_edge(CLK)) THEN
-            DOUT <= DIN;
+        IF (RST = '1') THEN
+            DOUT <= '0';
+        ELSE
+            IF (rising_edge(CLK)) THEN
+                IF (ENABLE = '1') THEN
+                    DOUT <= DIN;
+                END IF;
+            END IF;
         END IF;
     END PROCESS;
 END ARCHITECTURE;
