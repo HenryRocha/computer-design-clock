@@ -84,7 +84,7 @@ BEGIN
 
     muxImedDados <= add OR sub OR movm OR instOR OR instAND;
 
-    habEscritaReg <= add OR addi OR sub OR subi OR movm OR lea OR cmp OR instOR OR instAND;
+    habEscritaReg <= add OR addi OR sub OR subi OR movm OR lea OR instOR OR instAND;
 
     WITH opcode SELECT
         operacao <= "001" WHEN opcodeAdd,
