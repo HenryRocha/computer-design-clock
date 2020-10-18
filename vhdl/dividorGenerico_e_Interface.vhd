@@ -21,7 +21,7 @@ ARCHITECTURE interface OF divisorGenerico_e_Interface IS
 BEGIN
     baseTempo : ENTITY work.divisorGenerico
         GENERIC MAP(
-            divisor => 5
+            divisor => 25000000
         ) -- divide por 10.
         PORT MAP(
             clk       => clk,
