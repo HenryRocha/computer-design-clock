@@ -55,21 +55,21 @@ BEGIN
 
     -- Verificando qual instru��o deve ser executada. Dependendo de qual for
     -- n�o devemos habilitar nenhuma interface.
-    habilita(0) <= '1' WHEN (numSeletor >= 3072) ELSE
+    habilita(0) <= '1' WHEN (numSeletor >= 3072 AND deveHabilitar = '1') ELSE
     '0';
 
-    habilita(1) <= '1' WHEN numSeletor >= 2048 AND numSeletor <= 2050 ELSE
+    habilita(1) <= '1' WHEN (numSeletor >= 2048 AND numSeletor <= 2050 AND deveHabilitar = '1') ELSE
     '0';
 
-    habilita(2) <= '1' WHEN numSeletor = 1024 ELSE
+    habilita(2) <= '1' WHEN (numSeletor = 1024 AND deveHabilitar = '1') ELSE
     '0';
 
-    habilita(3) <= '1' WHEN numSeletor >= 10 AND numSeletor <= 13 ELSE
+    habilita(3) <= '1' WHEN (numSeletor >= 10 AND numSeletor <= 13 AND deveHabilitar = '1') ELSE
     '0';
 
-    habilita(4) <= '1' WHEN numSeletor >= 0 AND numSeletor <= 9 ELSE
+    habilita(4) <= '1' WHEN (numSeletor >= 0 AND numSeletor <= 9 AND deveHabilitar = '1') ELSE
     '0';
 
-    habilita(5) <= '1' WHEN numSeletor = 1025 ELSE
+    habilita(5) <= '1' WHEN (numSeletor = 1025 AND deveHabilitar = '1') ELSE
     '0';
 END ARCHITECTURE;
