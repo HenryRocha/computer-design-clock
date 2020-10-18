@@ -80,9 +80,13 @@ class Assembler():
 
     @staticmethod
     def __read_file(file: str) -> list():
+        commands = []
         with open(file, 'r') as f:
-            commands = f.read()
-            commands = commands.split('\n')
+            instruction = f.readline()
+            while instruction:
+                if instruction != '\n' and instruction[0] != ';':
+                    commands.append(instruction.split('\n')[0])
+                instruction = f.readline()
         return commands
     
     @staticmethod
@@ -90,5 +94,3 @@ class Assembler():
         with open(output, 'w') as f:
             for line, instruction in enumerate(instructions):
                 f.write(f'\t\ttmp({line}) := \"{instruction[:4]}\" & \"{instruction[4:7]}\" & \"{instruction[7:]}\";\n')
-
-Assembler('/Users/eller/insper/2020.2/descomp/computer-design-clock/assembler/debug.nasm', 'debug.txt')
