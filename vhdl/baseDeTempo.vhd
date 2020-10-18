@@ -27,7 +27,7 @@ ARCHITECTURE interface OF baseDeTempo IS
 
     -- Quantos clocks devemos esperar.
     signal clock_slow : NATURAL := 50000000;
-    signal clock_fast : NATURAL := 200000;
+    signal clock_fast : NATURAL := 1000000;
     SIGNAL num_clocks : NATURAL;
 BEGIN
     -- Respons�vel por fazer a leitura de um clock, aumentar o contador e quando
